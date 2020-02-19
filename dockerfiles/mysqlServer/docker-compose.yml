@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  db:
+    image: mariadb
+    restart: always
+    ports: 
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: btb
+      MYSQL_PASSWORD: btb
+      MYSQL_DATABASE: btb
+    volumes: 
+      # file to be imported named db.sql.gz in the same directory
+      - ./db.sql.gz:/docker-entrypoint-initdb.d/db.sql.gz
